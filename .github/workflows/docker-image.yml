@@ -83,8 +83,7 @@ jobs:
         with:
           push: true
           tags: |
-            ghcr.io/dream10201/115docker:latest
-            docker.io/xiuxiu10201/115:latest
+            docker.io/sykuang/115drive:latest
 
       - name: Release and push (master branch)
         if: ${{ github.event_name != 'workflow_dispatch' && github.ref_name == 'master' }}
@@ -92,7 +91,4 @@ jobs:
         with:
           push: true
           tags: |
-            ghcr.io/dream10201/115docker:latest
-            ghcr.io/dream10201/115docker:${{ steps.fetch-url.outputs.version }}
-            docker.io/xiuxiu10201/115:latest
-            docker.io/xiuxiu10201/115:${{ steps.fetch-url.outputs.version }}
+            docker.io/sykuang/115drive:latest
