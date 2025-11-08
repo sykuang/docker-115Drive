@@ -14,9 +14,11 @@ if [ -z "${DISPLAY_HEIGHT}" ]; then
     DISPLAY_HEIGHT=768
 fi
 mkdir -p "${HOME}/.vnc"
-export PASSWD_PATH="${HOME}/.vnc/passwd"
-echo ${PASSWORD} | vncpasswd -f >"${PASSWD_PATH}"
-chmod 0600 "${HOME}/.vnc/passwd"
+if [[ -n $VNC_PASSWORD ]]; then
+    export PASSWD_PATH="${HOME}/.vnc/passwd"
+    echo ${VNC_PASSWORD} | vncpasswd -f >"${PASSWD_PATH}"
+    chmod 0600 "${HOME}/.vnc/passwd"
+fi
 "${NO_VNC_HOME}"/utils/novnc_proxy --vnc localhost:$((5900+${DISPLAY#:})) --listen ${WEB_PORT} &
 echo "geometry=${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}" >~/.vnc/config
 /usr/libexec/vncserver ${DISPLAY} &
