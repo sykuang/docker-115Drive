@@ -20,7 +20,7 @@ if [[ -n $VNC_PASSWORD ]]; then
     echo ${VNC_PASSWORD} | vncpasswd -f >"${PASSWD_PATH}"
     chmod 0600 "${HOME}/.vnc/passwd"
 else
-    vncserver_args+=" -SecurityTypes None"
+    vncserver_args=" -SecurityTypes None ${DISPLAY}"
 fi
 "${NO_VNC_HOME}"/utils/novnc_proxy --vnc localhost:$((5900+${DISPLAY#:})) --listen ${WEB_PORT} &
 echo "geometry=${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}" >~/.vnc/config
